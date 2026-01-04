@@ -172,6 +172,12 @@
 <p>To simplify block generation (mining), the signature also does not commit to the block nonce value, so that rolling the nonce to generate proof-of-work does not also require regenerating signatures. When grinding proof of work, the extended nonce cannot be used as it would invalidate the signature. Instead, simply resigning the same (or an updated) block will give a new search space.</p>
 <p>A block is considered fully validated only if the to_sign transaction is a valid spend of the to_spend transaction. It is recommended that this verification is done directly before or after the witness commitment verification, as the data required to do both is approximately the same.</p>
 <p>There is one other acceptable special case: if a block's challenge is e.g. <code>OP_TRUE</code> (<code>0x51</code>), where an empty solution would result in success, the block is also considered valid if the signet commitment is absent.</p>
+<h3> Minimum Difficulty </h3>
+<p>The minimum difficulty for blocks in signet is approximately
+0.0011265, corresponding to a maximum target of
+<code>00000377ae000000000000000000000000000000000000000000000000000000</code>
+which is represented by an nBits value of <code>0x1e0377ae</code>.</p>
+<p>This value is chosen so that multiplying the maximum target by maximum retarget timespan (8 weeks measured in seconds) does not overflow a uint256, making it easier to do difficulty adjustment calculations.</p>
 <h2> Genesis Block and Message Start </h2>
 <p>The genesis block is the same for all signet networks, whereas the message start is defined as the first four bytes of the sha256d of the challenge script as a single data push (see below).</p>
 <h3> Genesis Block </h3>
@@ -213,7 +219,7 @@
             <div data-pagefind-ignore class="w-full flex flex-col items-center space-y-2 text-center">
                 <div class="flex items-center space-x-2">
                     <p class="font-bold">Updated</p>
-                    <p class="font-bold">2025-11-25</p>
+                    <p class="font-bold">2026-01-04</p>
                 </div>
                 <p>See an issue with rendering or formatting? Submit an issue on <a href="https://github.com/nickmonad/bips.dev" target="_blank">GitHub</a></p>
                 <p>Do you find this site useful? Please consider <a href="https://buy.tryspeed.com/plink_live_lyek4a2yW2Sn2wfA" target="_blank">donating</a> some sats to support ongoing development.</p>
